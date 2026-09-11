@@ -41,10 +41,12 @@
   <iframe id="app" allow="fullscreen; web-share; clipboard-write"></iframe>
   <script>
     // ⬇⬇⬇ ВСТАВЬ СЮДА свою /exec ссылку веб-приложения ⬇⬇⬇
-    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3JRddq726B2XjJciow7jrKXr78g4FThtRZuVZUkinA0tzjK8yQAYbN2_xldN-wPGCkw/exec';
+    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwiktk7zl_r4i6nowRb8CejHPXWdvAEg7F9WFFsWTSasTQjNykrx0ncGTT7LxwFTHvGdA/exec';
 
     var f = document.getElementById('app');
-    f.src = SCRIPT_URL + location.search;
+    // передаём внутрь ?id=N и СВОЙ адрес (pub) — QR «Поделиться» строится от него сам
+    var joiner = location.search ? location.search + '&' : '?';
+    f.src = SCRIPT_URL + joiner + 'pub=' + encodeURIComponent(location.origin + location.pathname);
     function hide(){ var l = document.getElementById('ld');
       if (l) { l.style.opacity = 0; setTimeout(function(){ l.remove(); }, 450); } }
     f.addEventListener('load', function(){ setTimeout(hide, 300); });

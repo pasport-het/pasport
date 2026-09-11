@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Transformator pasporti</title>
 
+<!-- предподключение — экономит время на установке соединений -->
+<link rel="preconnect" href="https://script.google.com">
+<link rel="dns-prefetch" href="https://script.google.com">
+<link rel="preconnect" href="https://api.qrserver.com">
+<link rel="preconnect" href="https://drive.google.com">
+
 <!-- Иконка приложения при «Добавить на главный экран» -->
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon.jpg">
@@ -36,21 +42,30 @@
 <body>
   <div id="ld">
     <div class="spin"></div>
-    <div class="t">Ma'lumotlar yuklanmoqda…</div>
+    <div class="t" id="ldt">Ma'lumotlar yuklanmoqda…</div>
   </div>
   <iframe id="app" allow="fullscreen; web-share; clipboard-write"></iframe>
   <script>
     // ⬇⬇⬇ ВСТАВЬ СЮДА свою /exec ссылку веб-приложения ⬇⬇⬇
-    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwiktk7zl_r4i6nowRb8CejHPXWdvAEg7F9WFFsWTSasTQjNykrx0ncGTT7LxwFTHvGdA/exec';
+    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyKI8ulC-lhXh1LKlo0DUKFa0tzdgJcU-OaoeMdE4c_A7cTvCF5O1VvBdzwd6o9JrCGMQ/exec';
 
     var f = document.getElementById('app');
     // передаём внутрь ?id=N и СВОЙ адрес (pub) — QR «Поделиться» строится от него сам
     var joiner = location.search ? location.search + '&' : '?';
     f.src = SCRIPT_URL + joiner + 'pub=' + encodeURIComponent(location.origin + location.pathname);
-    function hide(){ var l = document.getElementById('ld');
+    // сменяющиеся статусы, пока грузится
+    var steps = ['Serverga ulanmoqda…', 'Ma\'lumotlar tayyorlanmoqda…', 'Deyarli tayyor…'];
+    var si = 0, stTimer = setInterval(function(){
+      var t = document.getElementById('ldt');
+      if (t && si < steps.length) t.textContent = steps[si++];
+      else clearInterval(stTimer);
+    }, 2200);
+
+    function hide(){ clearInterval(stTimer);
+      var l = document.getElementById('ld');
       if (l) { l.style.opacity = 0; setTimeout(function(){ l.remove(); }, 450); } }
     f.addEventListener('load', function(){ setTimeout(hide, 300); });
-    setTimeout(hide, 7000);
+    setTimeout(hide, 12000);
   </script>
 </body>
 </html>

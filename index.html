@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transformator pasporti</title>
+<style>
+  html,body{height:100%;margin:0;background:#d6ccbc}
+  iframe{position:fixed;inset:0;width:100%;height:100%;border:none}
+  #ld{position:fixed;inset:0;z-index:10;background:#f5f0e6;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:16px;transition:opacity .4s ease;
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
+  .spin{width:46px;height:46px;border-radius:50%;border:4px solid #e3d9c5;border-top-color:#77634f;
+      animation:sp .8s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .t{color:#77634f;font-size:14px;font-weight:700;letter-spacing:.4px}
+</style>
+</head>
+<body>
+  <div id="ld">
+    <div class="spin"></div>
+    <div class="t">Ma'lumotlar yuklanmoqda…</div>
+  </div>
+  <iframe id="app" allow="fullscreen"></iframe>
+  <script>
+    // ⬇⬇⬇ ВСТАВЬ СЮДА свою /exec ссылку веб-приложения ⬇⬇⬇
+    var SCRIPT_URL = 'https://script.google.com/macros/s/ВАША_ССЫЛКА/exec';
+
+    var f = document.getElementById('app');
+    f.src = SCRIPT_URL + location.search;   // ?id=N передаётся внутрь автоматически
+    function hide(){ var l = document.getElementById('ld');
+      if (l) { l.style.opacity = 0; setTimeout(function(){ l.remove(); }, 450); } }
+    f.addEventListener('load', function(){ setTimeout(hide, 300); });
+    setTimeout(hide, 7000); // запасной вариант
+  </script>
+</body>
+</html>

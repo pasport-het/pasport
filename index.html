@@ -7,8 +7,8 @@
 
 <!-- Иконка приложения при «Добавить на главный экран» -->
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon.png">
-<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.jpg">
+<link rel="icon" type="image/jpeg" href="icon.jpg">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#77634f">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#15110d">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -38,10 +38,10 @@
     <div class="spin"></div>
     <div class="t">Ma'lumotlar yuklanmoqda…</div>
   </div>
-  <iframe id="app" allow="fullscreen"></iframe>
+  <iframe id="app" allow="fullscreen; web-share; clipboard-write"></iframe>
   <script>
     // ⬇⬇⬇ ВСТАВЬ СЮДА свою /exec ссылку веб-приложения ⬇⬇⬇
-    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyuphE04Ul50KNmwg9EHzjzVqcrUdJ0_uIaHBHl3Y3jFN4LRtiFEimn0ezVJ4Zv830M/exec';
+    var SCRIPT_URL = 'https://script.google.com/macros/s/ВАША_ССЫЛКА/exec';
 
     var f = document.getElementById('app');
     f.src = SCRIPT_URL + location.search;

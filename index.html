@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Transformator pasporti</title>
+
+<!-- Иконка приложения при «Добавить на главный экран» -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" type="image/png" href="icon.png">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#77634f">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#15110d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Pasport">
+
 <style>
   html,body{height:100%;margin:0;background:#d6ccbc}
   iframe{position:fixed;inset:0;width:100%;height:100%;border:none}
@@ -14,6 +25,12 @@
       animation:sp .8s linear infinite}
   @keyframes sp{to{transform:rotate(360deg)}}
   .t{color:#77634f;font-size:14px;font-weight:700;letter-spacing:.4px}
+  @media (prefers-color-scheme:dark){
+    html,body{background:#15110d}
+    #ld{background:#231e17}
+    .spin{border-color:#3d352a;border-top-color:#c6a463}
+    .t{color:#c6a463}
+  }
 </style>
 </head>
 <body>
@@ -24,14 +41,14 @@
   <iframe id="app" allow="fullscreen"></iframe>
   <script>
     // ⬇⬇⬇ ВСТАВЬ СЮДА свою /exec ссылку веб-приложения ⬇⬇⬇
-    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzfBxQg4M1TvmD_HcWEX4pvknGY2VPDHD0Sx0KQD_nLSihZTyOGT3E9iLsyGw0WhQUwLQ/exec';
+    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyuphE04Ul50KNmwg9EHzjzVqcrUdJ0_uIaHBHl3Y3jFN4LRtiFEimn0ezVJ4Zv830M/exec';
 
     var f = document.getElementById('app');
-    f.src = SCRIPT_URL + location.search;   // ?id=N передаётся внутрь автоматически
+    f.src = SCRIPT_URL + location.search;
     function hide(){ var l = document.getElementById('ld');
       if (l) { l.style.opacity = 0; setTimeout(function(){ l.remove(); }, 450); } }
     f.addEventListener('load', function(){ setTimeout(hide, 300); });
-    setTimeout(hide, 7000); // запасной вариант
+    setTimeout(hide, 7000);
   </script>
 </body>
 </html>
